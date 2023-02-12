@@ -31,6 +31,9 @@
         />
       </svg>
       <input type="password" formControlName="password" placeholder="Senha" />
+      <div *ngIf="formAuth.get('password')?.errors && (formAuth.get('password')?.touched) ">
+        Entre com no minimo 6 caracteres composto por letras e numeros
+      </div>
     </label>
 
     <button class="btn-vermelho" [disabled]=" formAuth.invalid">Login</button>
