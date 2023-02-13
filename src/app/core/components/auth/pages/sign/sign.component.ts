@@ -20,6 +20,8 @@ export class SignComponent implements OnInit {
     password: ['', [Validators.required, senhaValidator]],
   });
 
+  public msgError!: string;
+
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService
@@ -29,7 +31,13 @@ export class SignComponent implements OnInit {
 
   public submitForm() {
     if (this.formAuth.valid) {
-      console.log(this.formAuth);
+      this.authService.sign({
+        email: this.formAuth.value.email,
+        password: this.formAuth.value.password,
+      }).subscribe({
+        next: (res) => res,
+        error: (e) => (this.msgError = e),
+      })
     }
   }
 
